@@ -1,0 +1,14 @@
+FROM spigotmc-base:latest
+
+RUN cd /opt/spigotmc-build; git config --global --unset core.autocrlf; java -jar BuildTools.jar \
+    && mv spigot*.jar spigot.jar
+
+RUN apt-get remove -y default-jdk git \
+    && apt-get install -y default-jre \
+    && apt -y autoremove
+
+ADD start.sh /opt/spigotmc/
+
+VOLUME ["/opt/spigotmc/server/"]
+
+CMD ["/opt/spigotmc/start.sh"]

@@ -1,0 +1,6 @@
+FROM ubuntu:latest
+
+RUN apt-get update \
+    && apt-get install -y default-jdk git
+
+ADD https://hub.spigotmc.org/jenkins/job/BuildTools/lastStableBuild/artifact/target/BuildTools.jar /opt/spigotmc-build/
